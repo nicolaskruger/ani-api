@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useAppDispatch } from "../../../app/hooks";
 import { GENERATE_TOKEN } from "../../../constants";
-import { setTokenAction } from "../../../reducer/token/token.slicer";
+import { setTokenAction, setTokenAsyncAction } from "../../../reducer/token/token.slicer";
 import { Input } from "../../components";
 import { LoginButton, LoginDiv, LoginForm, LoginInput, LoginLabel, LoginLink, LoginSpan } from "./login.style";
 
@@ -14,7 +14,7 @@ const LoginScreen = () => {
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        dispatch(setTokenAction(token));
+        dispatch(setTokenAsyncAction(token));
     }
 
     return (

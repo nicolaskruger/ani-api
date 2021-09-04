@@ -57,20 +57,20 @@ import { RouterBuilder } from './routers';
 //     </div>
 //   );
 // }
+const { Background } = COLOR;
 
-function App() {
-
-  const { Background } = COLOR;
-
-  const DivApp = styled.div`
+const DivApp = styled.div`
     background-color: ${Background};
     width: 100%;
     min-height: 100vh;
   `;
-  const Container = styled.div`
+const Container = styled.div`
     max-width: 1000px;
     margin: 0 auto;
   `;
+
+function App() {
+
 
   return (
     <DivApp>
