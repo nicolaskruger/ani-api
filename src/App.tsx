@@ -1,6 +1,4 @@
 import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
 import './App.css';
 import styled from 'styled-components';
 import { COLOR } from './constants';
@@ -66,6 +64,7 @@ const DivApp = styled.div`
   `;
 const Container = styled.div`
     max-width: 1000px;
+    width: 90%;
     margin: 0 auto;
   `;
 

@@ -21,4 +21,6 @@ const Input = (props: InputProps) => {
     );
 }
 
+export type { InputProps }
+
 export { Input }

@@ -1,9 +1,11 @@
 import { Me } from "../../../dto";
 import { myAniApi } from "../axios"
+import { PopUpState } from "../token.slicer";
 
 export type MeTokenDto = {
     token: string,
-    me?: Me
+    me?: Me,
+    pop_up: PopUpState
 };
 
 const setTokenAsync = async (token: string): Promise<MeTokenDto> => {
@@ -13,12 +15,21 @@ const setTokenAsync = async (token: string): Promise<MeTokenDto> => {
         const resposne = await me();
         return {
             token,
-            me: resposne
+            me: resposne,
+            pop_up: {
+                message: "Ok !!!",
+                show: true,
+                success: true
+            }
         }
     } catch (error) {
-        console.log(error);
         return {
             token,
+            pop_up: {
+                message: "Fail ;(",
+                show: true,
+                success: false
+            }
         }
     }
 

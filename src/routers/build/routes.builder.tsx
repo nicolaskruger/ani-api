@@ -1,10 +1,14 @@
 import { FC } from "react";
-import { BrowserRouter, RouteProps, Switch } from "react-router-dom";
+import { BrowserRouter, RouteProps, Switch, Redirect } from "react-router-dom";
+import { useAppSelector } from "../../app/hooks";
 import { ROUTE_FRONT } from "../../constants";
-import { LoginScreen } from "../../ui";
+import { token } from "../../reducer";
+import { LoginScreen, SearchScreen } from "../../ui";
+import { NoTokenRoute } from "../custom/no-token.route";
 import { PublicRoute } from "../custom/public.route";
+import { TokenRoute } from "../custom/token.route";
 
-const { LOGIN } = ROUTE_FRONT;
+const { LOGIN, SEARCH } = ROUTE_FRONT;
 
 type RouteBuild = {
     path: string,
@@ -13,12 +17,36 @@ type RouteBuild = {
     CustomRoute: FC<RouteProps>
 }
 
+const RouteRedirect = () => {
+    const tk = useAppSelector(token)
+
+    if (tk) {
+
+    }
+
+    return (
+        <Redirect to={LOGIN} />
+    )
+}
+
 const RouterBuilder = () => {
     const builder: RouteBuild[] = [
         {
             path: LOGIN,
             exact: true,
             component: LoginScreen,
+            CustomRoute: NoTokenRoute
+        },
+        {
+            path: SEARCH,
+            exact: true,
+            component: SearchScreen,
+            CustomRoute: TokenRoute
+        },
+        {
+            path: "/",
+            exact: false,
+            component: RouteRedirect,
             CustomRoute: PublicRoute
         }
     ]

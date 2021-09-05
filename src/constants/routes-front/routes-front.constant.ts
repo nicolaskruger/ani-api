@@ -1,5 +1,6 @@
 const ROUTE_FRONT = {
-    LOGIN: "/login"
+    LOGIN: "/login",
+    SEARCH: "/search"
 }
 
 export { ROUTE_FRONT }
