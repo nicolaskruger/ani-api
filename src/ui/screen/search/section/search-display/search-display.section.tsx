@@ -2,6 +2,7 @@ import { useAppSelector } from "../../../../../app/hooks"
 import { animeSelect, loading } from "../../../../../reducer"
 import { LoadingConnectComponent } from "../../../../components";
 import { SearchDisplayDiv } from "./search-display.style";
+import { SearchDisplayCardSection } from "./section";
 
 const SearchDisplaySection = () => {
 
@@ -16,9 +17,7 @@ const SearchDisplaySection = () => {
     return (
         <SearchDisplayDiv>
             {anime.data.documents.map(anim => (
-                <div key={anim.anilist_id}>
-                    <img src={anim.cover_image} alt="" />
-                </div>
+                <SearchDisplayCardSection anime={anim} />
             ))}
         </SearchDisplayDiv>
     )

@@ -2,7 +2,7 @@ import { useHistory } from "react-router";
 import { useAppSelector } from "../../../../../app/hooks";
 import { NextIcon } from "../../../../../assets/img/next/next.icon";
 import { PrevIcon } from "../../../../../assets/img/prev/prev.icon";
-import { ROUTE_FRONT } from "../../../../../constants";
+import { INITHIAL_PAGE, ROUTE_FRONT } from "../../../../../constants";
 import { useQuerySearch } from "../../../../../hooks"
 import { animeSelect } from "../../../../../reducer";
 import { SearchPaginatorButton, SearchPaginatorDiv, SearchPaginatorSpan } from "./search-paginator.style";
@@ -15,7 +15,7 @@ const SearchPaginatorSection = () => {
 
     const history = useHistory();
 
-    const lastPage = useAppSelector(animeSelect).data.last_page;
+    const lastPage = useAppSelector(animeSelect)?.data?.last_page || INITHIAL_PAGE;
 
     const pageNum = parseInt(page);
 

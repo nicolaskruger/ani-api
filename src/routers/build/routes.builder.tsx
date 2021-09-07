@@ -3,12 +3,12 @@ import { BrowserRouter, RouteProps, Switch, Redirect } from "react-router-dom";
 import { useAppSelector } from "../../app/hooks";
 import { ROUTE_FRONT } from "../../constants";
 import { token } from "../../reducer";
-import { LoginScreen, SearchScreen } from "../../ui";
+import { AnimeScreen, LoginScreen, SearchScreen } from "../../ui";
 import { NoTokenRoute } from "../custom/no-token.route";
 import { PublicRoute } from "../custom/public.route";
 import { TokenRoute } from "../custom/token.route";
 
-const { LOGIN, SEARCH } = ROUTE_FRONT;
+const { LOGIN, SEARCH, ANIME } = ROUTE_FRONT;
 
 type RouteBuild = {
     path: string,
@@ -41,6 +41,12 @@ const RouterBuilder = () => {
             path: SEARCH,
             exact: true,
             component: SearchScreen,
+            CustomRoute: TokenRoute
+        },
+        {
+            path: ANIME,
+            exact: true,
+            component: AnimeScreen,
             CustomRoute: TokenRoute
         },
         {

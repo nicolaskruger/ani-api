@@ -5,7 +5,7 @@ const SearchDisplayDiv = styled.div`
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
-    row-gap: 10px;
+    gap: 20px;
 `;
 
 export { SearchDisplayDiv }

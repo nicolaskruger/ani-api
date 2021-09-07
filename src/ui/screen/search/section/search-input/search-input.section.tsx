@@ -1,4 +1,4 @@
-import { InputHTMLAttributes } from "react";
+import { InputHTMLAttributes, useState } from "react";
 import { useHistory } from "react-router";
 import { SearchIcon } from "../../../../../assets";
 import { INITHIAL_PAGE, ROUTE_FRONT } from "../../../../../constants";
@@ -10,13 +10,12 @@ interface SearchInputProps extends InputHTMLAttributes<HTMLInputElement> {
     onChange: (val: any) => void
 };
 
-const SearchInputSection = (props: SearchInputProps) => {
+const SearchInputSection = () => {
+
+    const [value, setValue] = useState("");
 
     const { SEARCH_QUERY } = ROUTE_FRONT;
 
-    const aliasProps = props as InputProps;
-
-    const { value } = props;
 
     const history = useHistory();
 
@@ -29,7 +28,7 @@ const SearchInputSection = (props: SearchInputProps) => {
 
     return (
         <SearchInputForm onSubmit={handleSubmit}>
-            <Input {...aliasProps} Style={SearchInputInput} />
+            <Input value={value} onChange={setValue} Style={SearchInputInput} />
             <SearchIputButton>
                 <SearchIcon />
             </SearchIputButton>

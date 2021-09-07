@@ -5,7 +5,7 @@ import { QuerySearch } from "../../../../hooks";
 import { myAniApi } from "../../axios";
 
 export const searchAsyncAction = createAsyncThunk<Anime | undefined, QuerySearch, { state: RootState, extra: null }>(
-    "info/me",
+    "info/search",
     async (query, thunkAPI) => {
 
         const token = thunkAPI.getState().token.token as string;

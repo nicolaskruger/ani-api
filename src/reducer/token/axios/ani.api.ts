@@ -1,12 +1,12 @@
 import { AxiosResponse } from "axios";
 import { BASE_URL, ROUTES_BACK } from "../../../constants"
-import { Anime, Me } from "../../../dto";
+import { Anime, Me, SingleAnime } from "../../../dto";
 import { QuerySearch } from "../../../hooks";
 import { myAxios } from "./axios.api"
 
 const myAniApi = (Authorization: String = "") => {
 
-    const { ME, ANIME } = ROUTES_BACK;
+    const { ME, ANIME, ANIME_PARAM } = ROUTES_BACK;
 
     const instance = myAxios(BASE_URL, {
         Authorization: `Bearer ${Authorization}`
@@ -32,9 +32,16 @@ const myAniApi = (Authorization: String = "") => {
         return response.data;
     }
 
+    const animeId = async (id: number) => {
+        const response: AxiosResponse<SingleAnime> = await instance.get(ANIME_PARAM(id));
+
+        return response.data;
+    }
+
     return {
         me,
-        anime
+        anime,
+        animeId
     }
 
 }

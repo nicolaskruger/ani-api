@@ -1,10 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../../app/store";
-import { LOCAL_STORAGE } from "../../constants";
-import { Anime, Me } from "../../dto";
+import { LOCAL_STORAGE, SINGLE_ANIME } from "../../constants";
+import { Anime, Me, SingleAnime } from "../../dto";
 import { getLocalStorage } from "../../utils";
 import { hideFunction, setToken, setTokenAsync as setTokenA, showFunction } from "./function";
-import { searchAsyncAction } from "./thunk";
+import { searchAsyncAction, animeAsyncAction } from "./thunk";
 export * from "./thunk";
 
 export interface PopUpState {
@@ -18,7 +18,8 @@ export interface TokenState {
     me?: Me;
     loading: boolean;
     pop_up: PopUpState;
-    anime?: Anime
+    anime?: Anime,
+    single_anime?: SingleAnime
 }
 
 const initialState: TokenState = getLocalStorage(LOCAL_STORAGE.TOKEN) || {
@@ -70,6 +71,19 @@ export const tokenSlicer = createSlice({
                     loading: false
                 }
             })
+            .addCase(animeAsyncAction.pending, (state) => {
+                return {
+                    ...state,
+                    loading: true
+                }
+            })
+            .addCase(animeAsyncAction.fulfilled, (state, action) => {
+                return {
+                    ...state,
+                    loading: false,
+                    single_anime: action.payload
+                }
+            })
     }
 })
 
@@ -84,5 +98,7 @@ export const loading = (state: RootState) => state.token.loading;
 export const meSelect = (state: RootState) => state.token.me as Me;
 
 export const animeSelect = (state: RootState) => state.token.anime as Anime;
+
+export const singleAnimeSelect = (state: RootState) => state.token.single_anime as SingleAnime || SINGLE_ANIME;
 
 export const tokenReducer = tokenSlicer.reducer;

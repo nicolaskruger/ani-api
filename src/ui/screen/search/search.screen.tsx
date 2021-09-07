@@ -7,9 +7,9 @@ import { SearchDisplaySection, SearchHeader, SearchInputSection, SearchPaginator
 
 const SearchScreen = () => {
 
-    const [search, setSearch] = useState("");
-
     const query = useQuerySearch();
+
+    const { name, page } = query;
 
     const dispatch = useAppDispatch();
 
@@ -19,12 +19,12 @@ const SearchScreen = () => {
 
     useEffect(() => {
         dispatch(searchAsyncAction(query))
-    }, [query])
+    }, [name, page])
 
     return (
         <div>
             <SearchHeader />
-            <SearchInputSection value={search} onChange={setSearch} />
+            <SearchInputSection />
             <SearchDisplaySection />
             <SearchPaginatorSection />
         </div>

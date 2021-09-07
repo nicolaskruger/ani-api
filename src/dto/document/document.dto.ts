@@ -41,3 +41,9 @@ export interface Anime {
     data: DataAnime;
     version: string;
 }
+export interface SingleAnime {
+    status_code: number;
+    message: string;
+    data: DocumentAnime;
+    version: string;
+}
