@@ -1,9 +1,11 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../../app/store";
 import { LOCAL_STORAGE } from "../../constants";
-import { Me } from "../../dto";
+import { Anime, Me } from "../../dto";
 import { getLocalStorage } from "../../utils";
 import { hideFunction, setToken, setTokenAsync as setTokenA, showFunction } from "./function";
+import { searchAsyncAction } from "./thunk";
+export * from "./thunk";
 
 export interface PopUpState {
     message?: string;
@@ -15,7 +17,8 @@ export interface TokenState {
     token?: string;
     me?: Me;
     loading: boolean;
-    pop_up: PopUpState
+    pop_up: PopUpState;
+    anime?: Anime
 }
 
 const initialState: TokenState = getLocalStorage(LOCAL_STORAGE.TOKEN) || {
@@ -30,13 +33,6 @@ export const setTokenAsyncAction = createAsyncThunk(
     "token/set-async",
     setTokenA
 )
-export const meAsyncAction = createAsyncThunk<number, number, { state: TokenState, extra: null }>(
-    "info/me",
-    (any, thunkAPI) => {
-
-        return 0
-    }
-);
 
 export const tokenSlicer = createSlice({
     name: "token",
@@ -61,6 +57,19 @@ export const tokenSlicer = createSlice({
                     loading: false
                 }
             })
+            .addCase(searchAsyncAction.pending, (state) => {
+                return {
+                    ...state,
+                    loading: true
+                }
+            })
+            .addCase(searchAsyncAction.fulfilled, (state, action) => {
+                return {
+                    ...state,
+                    anime: action.payload,
+                    loading: false
+                }
+            })
     }
 })
 
@@ -73,5 +82,7 @@ export const popUp = (state: RootState) => state.token.pop_up;
 export const loading = (state: RootState) => state.token.loading;
 
 export const meSelect = (state: RootState) => state.token.me as Me;
+
+export const animeSelect = (state: RootState) => state.token.anime as Anime;
 
 export const tokenReducer = tokenSlicer.reducer;
