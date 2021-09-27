@@ -1,12 +1,12 @@
 import { AxiosResponse } from "axios";
 import { BASE_URL, ROUTES_BACK } from "../../../constants"
-import { Anime, Me, SingleAnime } from "../../../dto";
-import { QuerySearch } from "../../../hooks";
+import { Anime, Episode, Me, SingleAnime } from "../../../dto";
+import { QueryEpisode, QuerySearch } from "../../../hooks";
 import { myAxios } from "./axios.api"
 
 const myAniApi = (Authorization: String = "") => {
 
-    const { ME, ANIME, ANIME_PARAM } = ROUTES_BACK;
+    const { ME, ANIME, EPISODE, ANIME_PARAM } = ROUTES_BACK;
 
     const instance = myAxios(BASE_URL, {
         Authorization: `Bearer ${Authorization}`
@@ -38,12 +38,27 @@ const myAniApi = (Authorization: String = "") => {
         return response.data;
     }
 
+    const episode = async (query: QueryEpisode) => {
+        const response: AxiosResponse<Episode> = await instance.get(EPISODE, {
+            params: {
+                ...query
+            }
+        })
+
+        return response.data;
+    }
+
     return {
         me,
         anime,
-        animeId
+        animeId,
+        episode
     }
 
 }
 
-export { myAniApi }
+
+
+export {
+    myAniApi,
+}

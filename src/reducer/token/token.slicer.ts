@@ -1,10 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../../app/store";
 import { LOCAL_STORAGE, SINGLE_ANIME } from "../../constants";
-import { Anime, Me, SingleAnime } from "../../dto";
+import { Anime, Episode, Me, SingleAnime } from "../../dto";
 import { getLocalStorage } from "../../utils";
 import { hideFunction, setToken, setTokenAsync as setTokenA, showFunction } from "./function";
-import { searchAsyncAction, animeAsyncAction } from "./thunk";
+import { searchAsyncAction, animeAsyncAction, episodeAsyncAction } from "./thunk";
 export * from "./thunk";
 
 export interface PopUpState {
@@ -19,7 +19,9 @@ export interface TokenState {
     loading: boolean;
     pop_up: PopUpState;
     anime?: Anime,
-    single_anime?: SingleAnime
+    single_anime?: SingleAnime;
+    episode?: Episode;
+    loadingEp: boolean;
 }
 
 const initialState: TokenState = getLocalStorage(LOCAL_STORAGE.TOKEN) || {
@@ -84,6 +86,19 @@ export const tokenSlicer = createSlice({
                     single_anime: action.payload
                 }
             })
+            .addCase(episodeAsyncAction.pending, (state) => {
+                return {
+                    ...state,
+                    loadingEp: true
+                }
+            })
+            .addCase(episodeAsyncAction.fulfilled, (state, action) => {
+                return {
+                    ...state,
+                    episode: action.payload as Episode,
+                    loadingEp: false
+                }
+            })
     }
 })
 
@@ -95,6 +110,8 @@ export const popUp = (state: RootState) => state.token.pop_up;
 
 export const loading = (state: RootState) => state.token.loading;
 
+export const loadingEpSelect = (state: RootState) => state.token.loadingEp;
+
 export const meSelect = (state: RootState) => state.token.me as Me;
 
 export const animeSelect = (state: RootState) => state.token.anime as Anime;
@@ -102,3 +119,5 @@ export const animeSelect = (state: RootState) => state.token.anime as Anime;
 export const singleAnimeSelect = (state: RootState) => state.token.single_anime as SingleAnime || SINGLE_ANIME;
 
 export const tokenReducer = tokenSlicer.reducer;
+
+export const episodeSelect = (state: RootState) => state.token.episode as Episode;
