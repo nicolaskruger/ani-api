@@ -5,6 +5,7 @@ import { PrevIcon } from "../../../../../assets/img/prev/prev.icon";
 import { INITHIAL_PAGE, ROUTE_FRONT } from "../../../../../constants";
 import { useQuerySearch } from "../../../../../hooks"
 import { animeSelect } from "../../../../../reducer";
+import { PaginatorComponent } from "../../../../components";
 import { SearchPaginatorButton, SearchPaginatorDiv, SearchPaginatorSpan } from "./search-paginator.style";
 
 const SearchPaginatorSection = () => {
@@ -37,17 +38,7 @@ const SearchPaginatorSection = () => {
     }
 
     return (
-        <SearchPaginatorDiv>
-            <SearchPaginatorButton onClick={handlePrev}>
-                <PrevIcon />
-            </SearchPaginatorButton>
-            <SearchPaginatorSpan>
-                {page}
-            </SearchPaginatorSpan>
-            <SearchPaginatorButton onClick={handleNext}>
-                <NextIcon />
-            </SearchPaginatorButton>
-        </SearchPaginatorDiv>
+        <PaginatorComponent handleNext={handleNext} handlePrev={handlePrev} page={pageNum} />
     )
 }
 

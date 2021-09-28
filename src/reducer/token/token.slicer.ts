@@ -76,7 +76,7 @@ export const tokenSlicer = createSlice({
             .addCase(animeAsyncAction.pending, (state) => {
                 return {
                     ...state,
-                    loading: true
+                    loading: true,
                 }
             })
             .addCase(animeAsyncAction.fulfilled, (state, action) => {
@@ -89,6 +89,7 @@ export const tokenSlicer = createSlice({
             .addCase(episodeAsyncAction.pending, (state) => {
                 return {
                     ...state,
+                    episode: undefined,
                     loadingEp: true
                 }
             })

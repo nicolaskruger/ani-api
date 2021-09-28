@@ -10,7 +10,7 @@ const SearchDisplaySection = () => {
 
     const load = useAppSelector(loading);
 
-    if (load)
+    if (load || anime === undefined)
         return (
             <LoadingConnectComponent />
         )

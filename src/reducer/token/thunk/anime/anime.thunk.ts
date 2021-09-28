@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { RootState } from "../../../../app/store";
+import { SINGLE_ANIME } from "../../../../constants";
 import { SingleAnime } from "../../../../dto";
 import { myAniApi } from "../../axios";
 
@@ -11,7 +12,12 @@ export const animeAsyncAction = createAsyncThunk<SingleAnime | undefined, number
 
         const api = myAniApi(token);
 
-        return await api.animeId(id);
+        const response = await api.animeId(id);
 
+        if (response.status_code === 404) {
+            return SINGLE_ANIME;
+        }
+
+        return response;
     }
 );
