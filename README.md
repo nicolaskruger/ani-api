@@ -39,4 +39,4 @@ npm start
 
 ## :spider_web: Site
 
-[link](https://nicolaskruger.github.io/search)
+[link](https://nicolaskruger.github.io/ani-api/)
