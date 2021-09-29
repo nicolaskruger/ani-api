@@ -27,17 +27,13 @@ const EpisodesSection: FC = () => {
         <EpisodeDiv>
             {episode && episode.data.documents.map((ep, index) => {
                 return (
-                    <div>
-                        <video src={ep.video} />
-                        <EpisodeInerButton first={index === 0} key={ep.id}>
-                            <EpisodeSpan>{ep.number}</EpisodeSpan>
-                            <EpisodeA target="_blank" href={ep.video}>
-                                <DownloadIcon />
-                            </EpisodeA>
-                        </EpisodeInerButton>
 
-                    </div>
-
+                    <EpisodeInerButton first={index === 0} key={ep.id}>
+                        <EpisodeSpan>{ep.number}</EpisodeSpan>
+                        <EpisodeA target="_blank" href={ep.video}>
+                            <DownloadIcon />
+                        </EpisodeA>
+                    </EpisodeInerButton>
                 )
             })}
             <EpisodePaginator />
