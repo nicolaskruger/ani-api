@@ -16,13 +16,12 @@ const EpisodeInerButton = styled.button<EpisodeInerButtonProps>`
     margin: 0;
     border: 1px solid ${Current_Line};
     border-top: ${(props) => props.first ? `1px solid ${Current_Line}` : 'none'};
-    padding: 10px;
+    padding: 20px 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
     background-color: ${Background};
-    cursor: pointer;
     border-radius: 2px;
 `;
 
@@ -30,8 +29,13 @@ const EpisodeSpan = styled.span`
     color: ${Pink};
 `;
 
+const EpisodeA = styled.a`
+
+`;
+
 export {
     EpisodeDiv,
     EpisodeInerButton,
-    EpisodeSpan
+    EpisodeSpan,
+    EpisodeA
 }

@@ -2,10 +2,11 @@ import { FC, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { useAppSelector } from "../../../../../app/hooks";
+import { DownloadIcon } from "../../../../../assets";
 import { ROUTE_FRONT } from "../../../../../constants";
 import { useQueryEpisode } from "../../../../../hooks";
 import { episodeAsyncAction, episodeSelect } from "../../../../../reducer";
-import { EpisodeDiv, EpisodeInerButton, EpisodeSpan } from "./episode.style";
+import { EpisodeA, EpisodeDiv, EpisodeInerButton, EpisodeSpan } from "./episode.style";
 import { EpisodePaginator, LoadingEp } from "./section";
 
 const EpisodesSection: FC = () => {
@@ -26,13 +27,17 @@ const EpisodesSection: FC = () => {
         <EpisodeDiv>
             {episode && episode.data.documents.map((ep, index) => {
                 return (
-                    <Link to={ANIME_QUERY(query.id, query.page, index)}>
+                    <div>
+                        <video src={ep.video} />
                         <EpisodeInerButton first={index === 0} key={ep.id}>
                             <EpisodeSpan>{ep.number}</EpisodeSpan>
-                            <EpisodeSpan>{ep.locale}</EpisodeSpan>
-                            <EpisodeSpan>{ep.source}</EpisodeSpan>
+                            <EpisodeA target="_blank" href={ep.video}>
+                                <DownloadIcon />
+                            </EpisodeA>
                         </EpisodeInerButton>
-                    </Link>
+
+                    </div>
+
                 )
             })}
             <EpisodePaginator />
